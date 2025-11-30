@@ -3,15 +3,19 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import { roomHandler } from "./room/room";
+import dotenv from "dotenv"
 
 const app = express();
+dotenv.config();
+
+const port = process.env.PORT;
 
 app.get("/health", (_, res) => {
     res.send("Server is running");
 });
 
 app.use(cors());
-const port = 8080;
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
